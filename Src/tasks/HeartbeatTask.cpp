@@ -6,6 +6,7 @@
  */
 
 #include "HeartbeatTask.h"
+#include "main.h"
 #include <stm32f1xx_hal.h>
 
 void HeartbeatTask::setup() {

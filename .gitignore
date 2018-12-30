@@ -34,3 +34,4 @@
 *.settings*
 *.launch
 ps2keyboard/Debug/*
+/Debug/
