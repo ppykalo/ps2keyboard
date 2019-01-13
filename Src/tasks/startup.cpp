@@ -12,6 +12,9 @@
 #include <stm32f1xx_hal.h>
 #include <cmsis_os.h>
 
+#include "keyboard/IKeyboardDriver.h"
+#include "keyboard/PS2KeyboardDriver.h"
+
 #include "KeyboardTask.h"
 #include "HeartbeatTask.h"
 
@@ -26,12 +29,14 @@ public:
 	}
 };
 
-KeyboardTask<KeyboardPortIO> keyboard;
+PS2KeyboardDriver<KeyboardPortIO> keyboardDriver;
+
+KeyboardTask keyboard(&keyboardDriver);
 HeartbeatTask heartbeat;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == PS2_CLK_Pin) {
-		keyboard.handleClockInterrupt();
+		keyboardDriver.handleClockInterrupt();
 	}
 }
 
